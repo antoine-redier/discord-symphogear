@@ -68,6 +68,17 @@ const rewatchProgress = (msg) => {
 
 };
 
+const rewatchProgress = (msg) => {
+
+    const theDate = new Date();
+    const nbEpisode = (diffDays(beginning, theDate) % episodes.length);
+
+    const progress = Math.round((nbEpisode / episodes.length) * 100);
+
+    return `current rewatch progress: ${progress}% *(EP ${nbEpisode}/${episodes.length})*.`
+
+};
+
 
 const getAlbum = people => {
     let readyPeople = [];
