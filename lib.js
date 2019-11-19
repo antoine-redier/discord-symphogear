@@ -1,6 +1,6 @@
 "use strict";
 
-const { episodes, beginning, milliSecPerDay } = require("./variables");
+const { episodes, titles, beginning, milliSecPerDay } = require("./variables");
 
 const {
     createUser,
@@ -54,7 +54,18 @@ const episodeDate = (msg) => {
     const nbEpisode = (diffDays(beginning, theDate) % episodes.length);
     const episode = episodes[nbEpisode];
     const url = getEpisodeURL(episode);
-    return `${inputCmd.toLowerCase()} episode is ${episode}:\n\n${url}`;
+    return `${inputCmd.toLowerCase()}'s episode is ${episode}:\n\n> **${titles[nbEpisode]}**\n\n${url}`;
+};
+
+const rewatchProgress = (msg) => {
+
+    const theDate = new Date();
+    const nbEpisode = (diffDays(beginning, theDate) % episodes.length);
+
+    const progress = Math.round((nbEpisode / episodes.length) * 100);
+
+    return `current rewatch progress: ${progress}% *(EP ${nbEpisode}/${episodes.length})*.`
+
 };
 
 
@@ -126,4 +137,5 @@ module.exports = {
     addAlbum,
     getEpisodeURL,
     episodeDate,
+    rewatchProgress
 };
